@@ -196,6 +196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: books 2
       objectReference: {fileID: 0}
+    - target: {fileID: 178048, guid: 9f42cd587c001ae409698a67769cad45, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 464356, guid: 9f42cd587c001ae409698a67769cad45, type: 3}
       propertyPath: m_RootOrder
       value: 54
@@ -256,6 +260,10 @@ PrefabInstance:
     - target: {fileID: 197206, guid: 65713c105e632284c8d64283f7c2de50, type: 3}
       propertyPath: m_Name
       value: Mattress (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 197206, guid: 65713c105e632284c8d64283f7c2de50, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 408168, guid: 65713c105e632284c8d64283f7c2de50, type: 3}
       propertyPath: m_RootOrder
@@ -493,6 +501,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: books 1
       objectReference: {fileID: 0}
+    - target: {fileID: 175168, guid: d9812c5dc9c93044493510ec48b74fbe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 432868, guid: d9812c5dc9c93044493510ec48b74fbe, type: 3}
       propertyPath: m_RootOrder
       value: 55
@@ -553,6 +565,10 @@ PrefabInstance:
     - target: {fileID: 158112, guid: c18155d53878b6849990947858600e91, type: 3}
       propertyPath: m_Name
       value: books 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 158112, guid: c18155d53878b6849990947858600e91, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 445546, guid: c18155d53878b6849990947858600e91, type: 3}
       propertyPath: m_RootOrder
@@ -2188,6 +2204,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: balloons
       objectReference: {fileID: 0}
+    - target: {fileID: 110780, guid: ce2f828b4d2c1034f9c0a2762a3c06ce, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 423414, guid: ce2f828b4d2c1034f9c0a2762a3c06ce, type: 3}
       propertyPath: m_RootOrder
       value: 57
@@ -2248,6 +2268,10 @@ PrefabInstance:
     - target: {fileID: 150516, guid: 124f2a22e1c0bbf4e88de607a56a896a, type: 3}
       propertyPath: m_Name
       value: Brushes
+      objectReference: {fileID: 0}
+    - target: {fileID: 150516, guid: 124f2a22e1c0bbf4e88de607a56a896a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 457664, guid: 124f2a22e1c0bbf4e88de607a56a896a, type: 3}
       propertyPath: m_RootOrder
@@ -2447,6 +2471,7 @@ GameObject:
   - component: {fileID: 1500212504}
   - component: {fileID: 1500212503}
   - component: {fileID: 1500212505}
+  - component: {fileID: 1500212506}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -2554,6 +2579,132 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &1500212506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500212502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc4d76f733087744991913c9d19d5274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LensFlareData: {fileID: 11400000, guid: 72dda2b5a37edff4c90ece6ea0e7c9d7, type: 2}
+  intensity: 1
+  maxAttenuationDistance: 100
+  maxAttenuationScale: 100
+  distanceAttenuationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  scaleByDistanceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  attenuationByLightShape: 1
+  radialScreenAttenuationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  useOcclusion: 0
+  occlusionRadius: 0.1
+  useBackgroundCloudOcclusion: 0
+  sampleCount: 32
+  occlusionOffset: 0.05
+  scale: 1
+  allowOffScreen: 0
+  volumetricCloudOcclusion: 0
+  occlusionRemapCurve:
+    <length>k__BackingField: 2
+    m_Loop: 0
+    m_ZeroValue: 1
+    m_Range: 1
+    m_Curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
 --- !u!1001 &1509152001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3602,6 +3753,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pig
       objectReference: {fileID: 0}
+    - target: {fileID: 198792, guid: d16dd6a6ef865224eb2ed3a46d70fb2e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 463056, guid: d16dd6a6ef865224eb2ed3a46d70fb2e, type: 3}
       propertyPath: m_RootOrder
       value: 20
@@ -3788,6 +3943,10 @@ PrefabInstance:
     - target: {fileID: 150982, guid: 93a48c185b5ae364085544e59c5f4381, type: 3}
       propertyPath: m_Name
       value: Stars wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 150982, guid: 93a48c185b5ae364085544e59c5f4381, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 492116, guid: 93a48c185b5ae364085544e59c5f4381, type: 3}
       propertyPath: m_RootOrder
@@ -4102,6 +4261,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mattress
       objectReference: {fileID: 0}
+    - target: {fileID: 197206, guid: 65713c105e632284c8d64283f7c2de50, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 408168, guid: 65713c105e632284c8d64283f7c2de50, type: 3}
       propertyPath: m_RootOrder
       value: 29
@@ -4353,6 +4516,22 @@ PrefabInstance:
     - target: {fileID: 139796, guid: 944a42c4af7f94a4e92a027f6f158821, type: 3}
       propertyPath: m_Name
       value: Milk
+      objectReference: {fileID: 0}
+    - target: {fileID: 139796, guid: 944a42c4af7f94a4e92a027f6f158821, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 141094, guid: 944a42c4af7f94a4e92a027f6f158821, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 169794, guid: 944a42c4af7f94a4e92a027f6f158821, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 195240, guid: 944a42c4af7f94a4e92a027f6f158821, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 476962, guid: 944a42c4af7f94a4e92a027f6f158821, type: 3}
       propertyPath: m_RootOrder
@@ -5276,6 +5455,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: World
       objectReference: {fileID: 0}
+    - target: {fileID: 160604, guid: f27fc86008321be4ab23b8a9c7f1afba, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 481520, guid: f27fc86008321be4ab23b8a9c7f1afba, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -5910,6 +6093,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box
       objectReference: {fileID: 0}
+    - target: {fileID: 140886, guid: 29d03729c2fc7834a8b790ecebf0ab8d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 442608, guid: 29d03729c2fc7834a8b790ecebf0ab8d, type: 3}
       propertyPath: m_RootOrder
       value: 38
@@ -6079,6 +6266,10 @@ PrefabInstance:
     - target: {fileID: 1000179909839168741, guid: c451831b151fc0745bf4729f876cfce6, type: 3}
       propertyPath: m_Name
       value: Colors box
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000179909839168741, guid: c451831b151fc0745bf4729f876cfce6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
