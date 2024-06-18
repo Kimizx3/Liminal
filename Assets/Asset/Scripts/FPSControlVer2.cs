@@ -20,7 +20,18 @@ namespace StarterAssets
 		public float RotationSpeed = 1.0f;
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
-		
+
+		[Space(10)]
+		[Tooltip("The height the player can jump")]
+		public float JumpHeight = 1.2f;
+		[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
+		public float Gravity = -15.0f;
+
+		[Space(10)]
+		[Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
+		public float JumpTimeout = 0.1f;
+		[Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
+		public float FallTimeout = 0.15f;
 
 		[Header("Player Grounded")]
 		[Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
@@ -39,6 +50,15 @@ namespace StarterAssets
 		public float TopClamp = 90.0f;
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
+		
+		[Header("Head Bobbing")]
+		[SerializeField] private bool _enable = true;
+		[SerializeField, Range(0, 0.1f)] private float _amplitude = 0.015f;
+		[SerializeField, Range(0, 30)] private float _frequency = 10.0f;
+		[SerializeField] private Transform _camera = null;
+		[SerializeField] private Transform _cameraHolder = null;
+		private float toggleSpeed = 3.0f;
+		private Vector3 _startPos;
 
 		// cinemachine
 		private float _cinemachineTargetPitch;
@@ -48,6 +68,10 @@ namespace StarterAssets
 		private float _rotationVelocity;
 		private float _verticalVelocity;
 		private float _terminalVelocity = 53.0f;
+
+		// timeout deltatime
+		private float _jumpTimeoutDelta;
+		private float _fallTimeoutDelta;
 
 	
 #if ENABLE_INPUT_SYSTEM
@@ -78,6 +102,8 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
+
+			_startPos = _camera.localPosition;
 		}
 
 		private void Start()
@@ -89,13 +115,22 @@ namespace StarterAssets
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
-			
+
+			// reset our timeouts on start
+			_jumpTimeoutDelta = JumpTimeout;
+			_fallTimeoutDelta = FallTimeout;
 		}
 
 		private void Update()
 		{
+			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			
+			if (!_enable) return;
+			CheckMotion();
+			ResetPosition();
+			_camera.LookAt(FocusTarget());
 		}
 
 		private void LateUpdate()
@@ -177,6 +212,97 @@ namespace StarterAssets
 
 			// move the player
 			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+		}
+
+		private void JumpAndGravity()
+		{
+			if (Grounded)
+			{
+				// reset the fall timeout timer
+				_fallTimeoutDelta = FallTimeout;
+
+				// stop our velocity dropping infinitely when grounded
+				if (_verticalVelocity < 0.0f)
+				{
+					_verticalVelocity = -2f;
+				}
+
+				// Jump
+				if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+				{
+					// the square root of H * -2 * G = how much velocity needed to reach desired height
+					_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+				}
+
+				// jump timeout
+				if (_jumpTimeoutDelta >= 0.0f)
+				{
+					_jumpTimeoutDelta -= Time.deltaTime;
+				}
+			}
+			else
+			{
+				// reset the jump timeout timer
+				_jumpTimeoutDelta = JumpTimeout;
+
+				// fall timeout
+				if (_fallTimeoutDelta >= 0.0f)
+				{
+					_fallTimeoutDelta -= Time.deltaTime;
+				}
+
+				// if we are not grounded, do not jump
+				_input.jump = false;
+			}
+
+			// apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
+			if (_verticalVelocity < _terminalVelocity)
+			{
+				_verticalVelocity += Gravity * Time.deltaTime;
+			}
+		}
+		
+		private void CheckMotion()
+		{
+			float speed = new Vector3(
+				_controller.velocity.x, 
+				0, 
+				_controller.velocity.z).magnitude;
+			
+			if(speed < toggleSpeed) return;
+			if(!_controller.isGrounded) return;
+			PlayMotion(FootStepMotion());
+			
+		}
+
+		private void PlayMotion(Vector3 motion)
+		{
+			_camera.localPosition += motion;
+		}
+
+		private Vector3 FootStepMotion()
+		{
+			Vector3 pos = Vector3.zero;
+			pos.y += Mathf.Sin(Time.time * _frequency) * _amplitude;
+			pos.x += Mathf.Cos(Time.time * _frequency / 2) * _amplitude * 2;
+			return pos;
+		}
+
+		private void ResetPosition()
+		{
+			if(_camera.localPosition == _startPos) return;
+			_camera.localPosition = Vector3.Lerp(_camera.localPosition, 
+				_startPos, 1 * Time.deltaTime);
+		}
+
+		private Vector3 FocusTarget()
+		{
+			Vector3 pos = new Vector3(
+				transform.position.x, 
+				transform.position.y + _cameraHolder.localPosition.y,
+				transform.position.z);
+			pos += _cameraHolder.forward * 15.0f;
+			return pos;
 		}
 
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
