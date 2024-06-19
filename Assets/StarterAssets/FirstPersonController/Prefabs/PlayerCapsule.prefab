@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 4135013735270702863}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.75, z: 0}
+  m_LocalPosition: {x: 0, y: 1.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -241,10 +241,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9229b5745ffdd142a5b4e614c770996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 4
+  MoveSpeed: 3
   SprintSpeed: 6
   RotationSpeed: 1
   SpeedChangeRate: 10
+  WaterSpeed: 2
   JumpHeight: 1.2
   Gravity: -15
   JumpTimeout: 0.1
@@ -259,8 +260,11 @@ MonoBehaviour:
   TopClamp: 90
   BottomClamp: -90
   _enable: 1
-  _amplitude: 0.00075
-  _frequency: 20
+  walkBobAmount: 0.005
+  sprintBobAmount: 0.01
+  waterBobAmount: 0.0015
+  _amplitude: 0.0015
+  _frequency: 7.5
   _camera: {fileID: 3992594586723116289}
   _cameraHolder: {fileID: 4135013735270702856}
 --- !u!1001 &5688450029112029307
@@ -281,7 +285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalPosition.z

@@ -13,13 +13,15 @@ namespace StarterAssets
 	{
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
-		public float MoveSpeed = 4.0f;
+		public float MoveSpeed = 3.0f;
 		[Tooltip("Sprint speed of the character in m/s")]
 		public float SprintSpeed = 6.0f;
 		[Tooltip("Rotation speed of the character")]
 		public float RotationSpeed = 1.0f;
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
+		[Tooltip("Move speed of the character in m/s")]
+		public float WaterSpeed = 1.5f;
 
 		[Space(10)]
 		[Tooltip("The height the player can jump")]
@@ -53,12 +55,17 @@ namespace StarterAssets
 		
 		[Header("Head Bobbing")]
 		[SerializeField] private bool _enable = true;
-		[SerializeField, Range(0, 0.1f)] private float _amplitude = 0.00075f;
-		[SerializeField, Range(0, 30)] private float _frequency = 20.0f;
+		[SerializeField, Range(0, 0.1f)] private float walkBobAmount = 0.0015f;
+		[SerializeField, Range(0, 30)] private float walkBobFrequency = 7.5f;
+		[SerializeField, Range(0, 0.1f)] private float sprintBobAmount = 0.1f;
+		[SerializeField, Range(0, 0.1f)] private float waterBobAmount = 0.025f;
+		[SerializeField, Range(0, 0.1f)] private float _amplitude = 0.015f;
+		[SerializeField, Range(0, 30)] private float _frequency = 10.0f;
 		[SerializeField] private Transform _camera = null;
 		[SerializeField] private Transform _cameraHolder = null;
-		private float toggleSpeed = 3.0f;
+		private float toggleSpeed = 0.1f;
 		private Vector3 _startPos;
+		private float timer;
 
 		// cinemachine
 		private float _cinemachineTargetPitch;
@@ -282,10 +289,20 @@ namespace StarterAssets
 
 		private Vector3 FootStepMotion()
 		{
+			/*
+			float bobSpeed = _speed > 6f ? SprintSpeed : 
+					_speed > 3f ? MoveSpeed : 
+					WaterSpeed;
+			float bobAmount = _speed > 6f ? sprintBobAmount :
+					_speed > 3.0f ? walkBobAmount :
+					waterBobAmount;
+			*/
 			Vector3 pos = Vector3.zero;
-			pos.x += Mathf.Sin(Time.time * _frequency) * _amplitude;
-			pos.y += Mathf.Cos(Time.time * _frequency / 2) * _amplitude * 2;
+			pos.y += Mathf.Sin(Time.time * walkBobFrequency) * walkBobAmount;
+			pos.x += Mathf.Cos(Time.time * _frequency / 2) * _amplitude * 2;
+			pos.x -= Mathf.Cos(Time.time * 2 / _frequency) * _amplitude * 2;
 			return pos;
+			
 		}
 
 		private void ResetPosition()
@@ -301,9 +318,9 @@ namespace StarterAssets
 		{
 			Vector3 pos = new Vector3(
 				transform.position.x, 
-				transform.position.y + _cameraHolder.localPosition.y,
+				transform.position.y + _camera.localPosition.y,
 				transform.position.z);
-			pos += _cameraHolder.forward * 15.0f;
+			pos += _cameraHolder.forward * 45.0f;
 			return pos;
 		}
 
