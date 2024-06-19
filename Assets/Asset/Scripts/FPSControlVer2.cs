@@ -53,8 +53,8 @@ namespace StarterAssets
 		
 		[Header("Head Bobbing")]
 		[SerializeField] private bool _enable = true;
-		[SerializeField, Range(0, 0.1f)] private float _amplitude = 0.015f;
-		[SerializeField, Range(0, 30)] private float _frequency = 10.0f;
+		[SerializeField, Range(0, 0.1f)] private float _amplitude = 0.00075f;
+		[SerializeField, Range(0, 30)] private float _frequency = 20.0f;
 		[SerializeField] private Transform _camera = null;
 		[SerializeField] private Transform _cameraHolder = null;
 		private float toggleSpeed = 3.0f;
