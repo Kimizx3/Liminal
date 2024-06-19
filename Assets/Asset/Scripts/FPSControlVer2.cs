@@ -283,16 +283,18 @@ namespace StarterAssets
 		private Vector3 FootStepMotion()
 		{
 			Vector3 pos = Vector3.zero;
-			pos.y += Mathf.Sin(Time.time * _frequency) * _amplitude;
-			pos.x += Mathf.Cos(Time.time * _frequency / 2) * _amplitude * 2;
+			pos.x += Mathf.Sin(Time.time * _frequency) * _amplitude;
+			pos.y += Mathf.Cos(Time.time * _frequency / 2) * _amplitude * 2;
 			return pos;
 		}
 
 		private void ResetPosition()
 		{
 			if(_camera.localPosition == _startPos) return;
-			_camera.localPosition = Vector3.Lerp(_camera.localPosition, 
-				_startPos, 1 * Time.deltaTime);
+			_camera.localPosition = Vector3.Lerp(
+				_camera.localPosition, 
+				_startPos, 
+				1 * Time.deltaTime);
 		}
 
 		private Vector3 FocusTarget()
