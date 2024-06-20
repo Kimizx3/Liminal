@@ -260,11 +260,12 @@ MonoBehaviour:
   TopClamp: 90
   BottomClamp: -90
   _enable: 1
-  walkBobAmount: 0.005
+  walkBobAmount: 0.0015
+  walkBobFrequency: 7.5
   sprintBobAmount: 0.01
   waterBobAmount: 0.0015
-  _amplitude: 0.0015
-  _frequency: 7.5
+  _amplitude: 0.00025
+  _frequency: 6
   _camera: {fileID: 3992594586723116289}
   _cameraHolder: {fileID: 4135013735270702856}
 --- !u!1001 &5688450029112029307
@@ -323,6 +324,10 @@ PrefabInstance:
       propertyPath: m_Lens.FieldOfView
       value: 88.489525
       objectReference: {fileID: 0}
+    - target: {fileID: 8762286024517199035, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
+      propertyPath: m_NoiseProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: a3dacaec0287d7444b4bd276816e1666, type: 2}
     - target: {fileID: 8762286024517199035, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_AmplitudeGain
       value: 1
