@@ -22,6 +22,11 @@ namespace StarterAssets
 		public float SpeedChangeRate = 10.0f;
 		[Tooltip("Move speed of the character in m/s")]
 		public float WaterSpeed = 1.5f;
+		public Transform hand;
+		public float DampingSpeed = 5f;
+		[SerializeField] private float JitterAmount = 0.2f; // Amount of jitter
+    	[SerializeField] private float JitterFrequency = 1f; // Frequency of jitter
+		private Vector3 _jitterOffset;
 
 		[Space(10)]
 		[Tooltip("The height the player can jump")]
@@ -154,23 +159,67 @@ namespace StarterAssets
 
 		private void CameraRotation()
 		{
+			// // if there is an input
+			// if (_input.look.sqrMagnitude >= _threshold)
+			// {
+			// 	//Don't multiply mouse input by Time.deltaTime
+			// 	float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+				
+			// 	_cinemachineTargetPitch += _input.look.y * RotationSpeed * deltaTimeMultiplier;
+			// 	_rotationVelocity = _input.look.x * RotationSpeed * deltaTimeMultiplier;
+
+			// 	// clamp our pitch rotation
+			// 	_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
+
+			// 	// Update Cinemachine camera target pitch
+			// 	CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
+
+			// 	// rotate the player left and right
+			// 	transform.Rotate(Vector3.up * _rotationVelocity);
+
+
+				
+			// }
 			// if there is an input
+    		// if there is an input
 			if (_input.look.sqrMagnitude >= _threshold)
 			{
 				//Don't multiply mouse input by Time.deltaTime
 				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
-				
+
 				_cinemachineTargetPitch += _input.look.y * RotationSpeed * deltaTimeMultiplier;
 				_rotationVelocity = _input.look.x * RotationSpeed * deltaTimeMultiplier;
 
 				// clamp our pitch rotation
 				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
-				// Update Cinemachine camera target pitch
-				CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
+				// Calculate the target rotation for the Cinemachine camera target
+				Quaternion targetRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
 
-				// rotate the player left and right
-				transform.Rotate(Vector3.up * _rotationVelocity);
+				// Smoothly interpolate to the target rotation using damping
+				CinemachineCameraTarget.transform.localRotation = Quaternion.Lerp(
+					CinemachineCameraTarget.transform.localRotation, targetRotation, Time.deltaTime * DampingSpeed);
+
+				// Calculate the target rotation for the player
+				Quaternion targetPlayerRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y + _rotationVelocity, 0.0f);
+
+				// Smoothly interpolate to the target rotation using damping
+				transform.rotation = Quaternion.Lerp(
+					transform.rotation, targetPlayerRotation, Time.deltaTime * DampingSpeed);
+
+				// Apply jitter/noise for a realistic hand-held effect
+				_jitterOffset = new Vector3(
+					Mathf.PerlinNoise(Time.time * JitterFrequency, 0.0f) - 0.5f,
+					Mathf.PerlinNoise(0.0f, Time.time * JitterFrequency) - 0.5f,
+					0.0f) * JitterAmount;
+
+				// Apply jitter to the whole camera
+				transform.localRotation *= Quaternion.Euler(_jitterOffset);
+
+				// Rotate the flashlight with the camera, including damping and jitter
+				Quaternion targetHandRotation = Quaternion.Euler(_cinemachineTargetPitch, transform.eulerAngles.y + _rotationVelocity, 0.0f);
+				hand.rotation = Quaternion.Lerp(hand.rotation, targetHandRotation, Time.deltaTime * DampingSpeed);
+				hand.rotation *= Quaternion.Euler(_jitterOffset);
 			}
 		}
 
