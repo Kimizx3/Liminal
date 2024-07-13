@@ -23,9 +23,12 @@ namespace StarterAssets
 		[Tooltip("Move speed of the character in m/s")]
 		public float WaterSpeed = 1.5f;
 		public Transform hand;
+		public GameObject flashLight;
 		public float DampingSpeed = 5f;
 		[SerializeField] private float JitterAmount = 0.2f; // Amount of jitter
     	[SerializeField] private float JitterFrequency = 1f; // Frequency of jitter
+		[SerializeField] private bool switchOn = false;
+
 		private Vector3 _jitterOffset;
 
 		[Space(10)]
@@ -131,6 +134,8 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+
+			flashLight.SetActive(false);
 		}
 
 		private void Update()
@@ -143,6 +148,8 @@ namespace StarterAssets
 			CheckMotion();
 			ResetPosition();
 			_camera.LookAt(FocusTarget());
+
+			SwitchOnFlashLight();
 		}
 
 		private void LateUpdate()
@@ -223,6 +230,25 @@ namespace StarterAssets
 			}
 		}
 
+		private void SwitchOnFlashLight()
+		{
+			if(switchOn == false)
+			{
+				if(Input.GetKeyDown(KeyCode.Mouse1))
+				{
+					flashLight.SetActive(true);
+					switchOn = true;
+				}
+			}
+			else
+			{
+				if(Input.GetKeyDown(KeyCode.Mouse1))
+				{
+					flashLight.SetActive(false);
+					switchOn = false;
+				}
+			}
+		}
 		private void Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed

@@ -42,6 +42,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   Event: 550
+--- !u!114 &-7340472339622120687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163d34cee9b7a428d9899ab92abd7e0d, type: 3}
+  m_Name: UmbraRenderFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  m_Shader: {fileID: 0}
+  camerasLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &-7321946436177418480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,7 +194,8 @@ MonoBehaviour:
   - {fileID: -7321946436177418480}
   - {fileID: -8983671916989960345}
   - {fileID: -1027669778457267732}
-  m_RendererFeatureMap: 71962dbc3e0a65de6c26496413b30b41d59b4b54392f3001e563715df6cdc284b7faabe46fa4646993e3ca3ecf667d3dfad320dc941c0c9d456898b48f6697ff9ca0665a02d71028c0c27b013be0f520879c6fbcee9dee4a5035aba71834bc6a0e9a73ae1c50c186135b713cf3911fb36084b2a3be14cacee6796ad46764b23b0ef234017e0ee932e03c85e3e65cbd39102735778238639a672f2931fd955383ec71a604c8fbbcf1
+  - {fileID: -7340472339622120687}
+  m_RendererFeatureMap: 71962dbc3e0a65de6c26496413b30b41d59b4b54392f3001e563715df6cdc284b7faabe46fa4646993e3ca3ecf667d3dfad320dc941c0c9d456898b48f6697ff9ca0665a02d71028c0c27b013be0f520879c6fbcee9dee4a5035aba71834bc6a0e9a73ae1c50c186135b713cf3911fb36084b2a3be14cacee6796ad46764b23b0ef234017e0ee932e03c85e3e65cbd39102735778238639a672f2931fd955383ec71a604c8fbbcf111333e714c67219a
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
